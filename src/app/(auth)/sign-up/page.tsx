@@ -82,115 +82,121 @@ const SignUp = () => {
     }
   };
 
+
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Foxtraa
-          </h1>
-          <p className="mb-4">Sign up</p>
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="username"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        debounced(e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                  {isCheckingUsername && <Loader className="animate-spin" />}
-                  <p
-                    className={`text-sm ${usernameMessage === "Username is unique" ? "text-green-500" : "text-red-500"}`}
-                  >
-                    {" "}
-                    {usernameMessage}{" "}
-                  </p>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input type="email" placeholder="email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
-                      {...field}
-                    />
-                  </FormControl>
-                  {showPassword ? (
-                    <div className="flex gap-1 items-center">
-                      <EyeOff
-                        size={20}
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="cursor-pointer text-sm"
+    <>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-full max-w-md p-8 space-y-8  rounded-lg shadow-md">
+          <div className="text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+              Foxtraa
+            </h1>
+            <p className="mb-4">Sign up</p>
+          </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="username"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          debounced(e.target.value);
+                        }}
                       />
-                      <p className="text-sm ">Hide password</p>
-                    </div>
-                  ) : (
-                    <div className="flex gap-1 items-center">
-                      <Eye
-                        size={20}
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="cursor-pointer text-sm"
+                    </FormControl>
+                    {isCheckingUsername && <Loader className="animate-spin" />}
+                    <p
+                      className={`text-sm ${usernameMessage === "Username is unique" ? "text-green-500" : "text-red-500"}`}
+                    >
+                      {" "}
+                      {usernameMessage}{" "}
+                    </p>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        {...field}
                       />
-                      <p className="text-sm ">Show password</p>
-                    </div>
-                  )}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader className="mr-2 h-4 w-4 animate-spin" />
-                  Please wait
-                </>
-              ) : (
-                "Sign Up"
-              )}
-            </Button>
-          </form>
-        </Form>
-        <div className="text-center mt-4">
-          <p>
-            Not a member yet?{" "}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
-              Sign in
-            </Link>
-          </p>
+                    </FormControl>
+                    {showPassword ? (
+                      <div className="flex gap-1 items-center">
+                        <EyeOff
+                          size={20}
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="cursor-pointer text-sm"
+                        />
+                        <p className="text-sm ">Hide password</p>
+                      </div>
+                    ) : (
+                      <div className="flex gap-1 items-center">
+                        <Eye
+                          size={20}
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="cursor-pointer text-sm"
+                        />
+                        <p className="text-sm ">Show password</p>
+                      </div>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </>
+                ) : (
+                  "Sign Up"
+                )}
+              </Button>
+            </form>
+          </Form>
+          <div className="text-center mt-4">
+            <p>
+              Not a member yet?{" "}
+              <Link
+                href="/sign-in"
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

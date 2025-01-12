@@ -23,6 +23,9 @@ export const authOptions: NextAuthOptions = {
               { username: credentials.identifier },
             ],
           });
+
+
+
           if (!user) {
             throw new Error("User not found with this email");
           }
