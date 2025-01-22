@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/context/AuthProvider";
-import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Foxtraa ",
-  description: "Simplify Trading",
+  title: {
+    default: "FoxTraa",
+    template: "%s | FoxTraa",
+  },
+  description: "Simplify Trading with Foxtraa",
 };
 
 export default function RootLayout({
