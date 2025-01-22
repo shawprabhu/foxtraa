@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useDebounceCallback } from "usehooks-ts";
+// import { useDebounceCallback } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 import { signUpSchema } from "@/schemas/signUpSchema";
 import axios, { AxiosError } from "axios";
@@ -24,12 +24,31 @@ import { Eye, EyeOff, Loader, Loader2 } from "lucide-react";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(""); // Immediate input value
   const [username, setUsername] = useState<string>("");
   const [usernameMessage, setUsernameMessage] = useState<string>("");
   const [isCheckingUsername, setIsCheckingUsername] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const debounced = useDebounceCallback(setUsername, 300);
+  // const debounced = useDebounceCallback(setUsername, 300);
+  function debounce<T extends (...args: any[]) => void>(
+    func: T,
+    delay: number
+  ) {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
+  const debouncedSetUsername = debounce(setUsername, 300);
+
+   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+     const value = e.target.value;
+     setInputValue(value); // Update input value immediately
+     debouncedSetUsername(value); // Debounce the API call
+   };
 
   const { toast } = useToast();
   const router = useRouter();
@@ -145,10 +164,8 @@ const SignUp = () => {
                       <Input
                         placeholder="username"
                         {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          debounced(e.target.value);
-                        }}
+                        value={inputValue}
+                        onChange={handleUsernameChange}
                       />
                     </FormControl>
                     {isCheckingUsername && <Loader className="animate-spin" />}
