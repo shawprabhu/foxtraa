@@ -15,13 +15,12 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { Loader } from "lucide-react";
-import { set } from "mongoose";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-const page = () => {
+const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
    const [isResendDisabled, setIsResendDisabled] = useState<boolean>(false);
    const [countdown, setCountdown] = useState<number>(40);
@@ -95,7 +94,8 @@ const page = () => {
     } catch (error) {
       console.error("error in signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      // let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast({
         title: "Signup failed",
         description: errorMessage,
@@ -159,4 +159,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

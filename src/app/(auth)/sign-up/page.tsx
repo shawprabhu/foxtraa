@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Loader, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -41,6 +41,7 @@ const SignUp = () => {
       timeoutId = setTimeout(() => func.apply(this, args), delay);
     };
   }
+
 
   const debouncedSetUsername = debounce(setUsername, 300);
 
@@ -97,7 +98,8 @@ const SignUp = () => {
     } catch (error) {
       console.error("error in signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      // let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast({
         title: "Signup failed",
         description: errorMessage,

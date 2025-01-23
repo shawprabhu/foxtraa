@@ -1,11 +1,3 @@
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TwitchIcon,
-  TwitterIcon,
-  YoutubeIcon
-} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 

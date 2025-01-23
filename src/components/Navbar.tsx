@@ -2,13 +2,13 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
-import { User } from "next-auth";
+// import { User } from "next-auth";
 import { Button } from "./ui/button";
 import InteractiveHoverButton from "./ui/interactive-hover-button";
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const user: User = session?.user as User;
+  // const user: User = session?.user as User;
 
   return (
     <header className="w-full h-[5rem] bg-black/20 backdrop-blur-sm shadow-md sticky top-0 z-50 p-6">
