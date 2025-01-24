@@ -1,5 +1,18 @@
 import "next-auth"
-import {DefaultSession, DefaultUser} from "next-auth"
+import {DefaultSession} from "next-auth"
+
+interface Credentials {
+  identifier: string;
+  password: string;
+}
+
+interface User {
+  _id?: string;
+  username?: string;
+  isVerified?: boolean;
+  email?: string;
+}
+
 
 declare module "next-auth" {
     interface User {
@@ -9,7 +22,6 @@ declare module "next-auth" {
         email?: string;
     }
 
-    interface 
     interface Session {
         user:{
             _id?: string;

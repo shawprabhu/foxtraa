@@ -47,7 +47,7 @@ export async function POST(req: Request) {
             { status: 200 }
         );
     } catch (error) {
-        console.error("error in resending code ", error)
+        console.log("error in resending code ", error)
         return NextResponse.json(
             {
                 success: false,

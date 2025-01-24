@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -9,7 +10,9 @@ import { useRouter } from "next/navigation";
 import { signUpSchema } from "@/schemas/signUpSchema";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+
 import {
   Form,
   FormControl,
@@ -42,16 +45,16 @@ const SignUp = () => {
     };
   }
 
-
   const debouncedSetUsername = debounce(setUsername, 300);
 
-   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-     const value = e.target.value;
-     setInputValue(value); // Update input value immediately
-     debouncedSetUsername(value); // Debounce the API call
-   };
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value); // Update input value immediately
+    form.setValue("username", value); // Update the form's username field
+    debouncedSetUsername(value); // Debounce the API call
+  };
 
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const router = useRouter();
 
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -90,20 +93,27 @@ const SignUp = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post<ApiResponse>("/api/sign-up", data);
-      toast({
-        title: "Success",
+      // toast({
+      //   title: "Success",
+      //   description: response.data.message,
+      // });
+      toast("Success", {
         description: response.data.message,
       });
+
       router.replace(`/verify/${username}`);
     } catch (error) {
-      console.error("error in signing up user", error);
+      // console.error("error in signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;
       // let errorMessage = axiosError.response?.data.message;
       const errorMessage = axiosError.response?.data.message;
-      toast({
-        title: "Signup failed",
+      // toast({
+      //   title: "Signup failed",
+      //   description: errorMessage,
+      //   variant: "destructive",
+      // });
+      toast("Signup failed", {
         description: errorMessage,
-        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);

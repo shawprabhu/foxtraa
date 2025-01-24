@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
     }
   } catch (error) {
-    console.error("error verifying user", error);
+    console.log("error verifying user", error);
     return NextResponse.json(
       {
         success: false,

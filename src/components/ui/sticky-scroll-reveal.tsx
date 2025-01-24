@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
@@ -57,7 +58,6 @@ export const StickyScroll = ({
   const [backgroundGradient, setBackgroundGradient] = useState(
     linearGradients[0]
   );
-
   useEffect(() => {
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
   }, [activeCard]);

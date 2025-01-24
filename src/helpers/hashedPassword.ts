@@ -6,6 +6,7 @@ export const encryptPassword = async (password: string): Promise<string> => {
         const encryptPassword = await bcryptjs.hash(password, salt);
         return encryptPassword;
     } catch (error) {
+        console.log("failed to encrypt password",error);
         throw new Error("Failed to encrypt password");
     }
 };

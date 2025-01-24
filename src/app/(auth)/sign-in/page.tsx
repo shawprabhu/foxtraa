@@ -3,7 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,7 @@ import { useState } from "react";
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const router = useRouter();
 
   //*zod implementation
@@ -35,50 +36,118 @@ const SignIn = () => {
     },
   });
 
+
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
-    setIsLoading(true);
-    const result = await signIn("credentials", {
-      redirect: false,
-      identifier: data.identifier,
-      password: data.password,
-    });
-    if (result?.error) {
-      const errData = JSON.parse(result.error);
-      if (
-        errData.message === "Please Verify your account before login" &&
-        errData.username
-      ) {
-        toast({
-          title: "SignIn failed",
-          description: "Verify your account to SignIn",
-          variant: "destructive",
-        });
-        router.replace(`/verify/${errData.username}`);
-        return;
+    setIsLoading(true); // Set loading state to true at the start
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        identifier: data.identifier,
+        password: data.password,
+      });
+
+      if (result?.error) {
+        const errData = JSON.parse(result.error);
+        if (
+          errData.message === "Please Verify your account before login" &&
+          errData.username
+        ) {
+          toast("SignIn failed", {
+            description: "Verify your account to SignIn",
+          });
+          router.replace(`/verify/${errData.username}`);
+          return;
+        }
+        if (errData.message === "CredentialsSignin") {
+          toast("SignIn failed", {
+            description: "Invalid credentials",
+          });
+        }if (errData.message === "User not found") {
+          toast("Failed", {
+            description: "User not found",
+          });
+        }
+         else if (errData.message === "Invalid credentials") {
+          toast("Something went wrong", {
+            description: result.error,
+          });
+        }else{
+          toast("Something went wrong", {
+            description: result.error,
+          });
+        }
+        return; // Stop further execution if there's an error
       }
-      if (errData.message === "CredentialsSignin") {
-        toast({
-          title: "SignIn failed",
-          description: "Invalid credentials",
-          variant: "destructive",
+
+      // Only show success toast and redirect if result.url exists
+      if (result?.url) {
+        toast("Success", {
+          description: "Signed in successfully",
         });
-      } else {
-        toast({
-          title: "Something went wrong",
-          description: result.error,
-          variant: "destructive",
-        });
+        router.replace("/dashboard");
       }
+    } catch (error) {
+      console.log("error in signing in user", error);
+      toast("Something went wrong", {
+        description: "An unexpected error occurred",
+      });
+    } finally {
+      setIsLoading(false); // Reset loading state in all cases
     }
-    toast({
-      title: "Success",
-      description: "Signed in successfully ",
-    });
-    if (result?.url) {
-      router.replace("/dashboard");
-    }
-    setIsLoading(true);
   };
+
+  // const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+  //   setIsLoading(true);
+  //   const result = await signIn("credentials", {
+  //     redirect: false,
+  //     identifier: data.identifier,
+  //     password: data.password,
+  //   });
+  //   if (result?.error) {
+  //     const errData = JSON.parse(result.error);
+  //     if (
+  //       errData.message === "Please Verify your account before login" &&
+  //       errData.username
+  //     ) {
+  //       // toast({
+  //       //   title: "SignIn failed",
+  //       //   description: "Verify your account to SignIn",
+  //       //   variant: "destructive",
+  //       // });
+  //       toast("SignIn failed", {
+  //         description: "Verify your account to SignIn"},)
+  //       router.replace(`/verify/${errData.username}`);
+  //       return;
+  //     }
+  //     if (errData.message === "CredentialsSignin") {
+  //       // toast({
+  //       //   title: "SignIn failed",
+  //       //   description: "Invalid credentials",
+  //       //   variant: "destructive",
+  //       // });
+  //       toast("SignIn failed", {
+  //         description: "Invalid credentials"},)
+  //     } else {
+  //       // toast({
+  //       //   title: "Something went wrong",
+  //       //   description: result.error,
+  //       //   variant: "destructive",
+  //       // });
+  //       toast("Something went wrong", {
+  //         description: result.error,})
+  //     }
+  //   }
+  //   // toast({
+  //   //   title: "Success",
+  //   //   description: "Signed in successfully ",
+  //   // });
+  //   toast("Success", {
+  //     description: "Signed in successfully ",})
+  //   if (result?.url) {
+  //     router.replace("/dashboard");
+  //   }
+  //   setIsLoading(true);
+  // };
 
   return (
     <>
@@ -126,9 +195,9 @@ const SignIn = () => {
                 name="identifier"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[1.15rem]">Email</FormLabel>
+                    <FormLabel className="text-[1.15rem]">Email / username</FormLabel>
                     <FormControl>
-                      <Input placeholder="email" {...field} />
+                      <Input placeholder="email/username" {...field} />
                     </FormControl>
                     <FormMessage className="text-red-400 text-sm" />
                   </FormItem>

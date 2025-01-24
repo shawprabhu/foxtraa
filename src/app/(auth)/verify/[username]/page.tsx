@@ -9,7 +9,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+
 import { verifySchema } from "@/schemas/verifySchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +29,7 @@ const Page = () => {
   const [isResending, setIsResending] = useState<boolean>(false);
   const router = useRouter();
   const params = useParams<{ username: string }>();
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   //*zod implementation
   const form = useForm<z.infer<typeof verifySchema>>({
@@ -63,17 +65,22 @@ const Page = () => {
     })
 
     if (response.data.success) {
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
+      // toast({
+      //   title: "Success",
+      //   description: response.data.message,
+      // });
+      toast("Success",{
+        description: response.data.message,})
       setIsResendDisabled(true);
     } else {
-      toast({
-        title: "Error",
+      // toast({
+      //   title: "Error",
+      //   description: response.data.message,
+      //   variant: "destructive",
+      // });
+      toast("Error",{
         description: response.data.message,
-        variant: "destructive",
-      });
+      })
     }
     setIsResending(false);
   }
@@ -86,21 +93,26 @@ const Page = () => {
         username: params.username,
         code: data.otp,
       });
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
+      // toast({
+      //   title: "Success",
+      //   description: response.data.message,
+      // });
+      toast("Success",{
+        description: response.data.message,})
       router.replace(`/sign-in`);
     } catch (error) {
-      console.error("error in signing up user", error);
+      // console.error("error in signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;
       // let errorMessage = axiosError.response?.data.message;
       const errorMessage = axiosError.response?.data.message;
-      toast({
-        title: "Signup failed",
+      // toast({
+      //   title: "Signup failed",
+      //   description: errorMessage,
+      //   variant: "destructive",
+      // });
+      toast("Signup failed",{
         description: errorMessage,
-        variant: "destructive",
-      });
+      })
     } finally {
       setIsSubmitting(false);
     }

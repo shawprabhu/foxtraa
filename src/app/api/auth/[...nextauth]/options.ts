@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
 import { decryptPassword } from "@/helpers/decryptPassword";
-
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,19 +24,22 @@ export const authOptions: NextAuthOptions = {
             ],
           });
 
-
-
           if (!user) {
-            throw new Error("User not found with this email");
+            // throw new Error("User not found with this email");
+            throw new Error(
+              JSON.stringify({
+                message: "User not found",
+              })
+            );
           }
           if (!user.isVerified) {
             // throw new Error("Please Verify your account before login");
-             throw new Error(
-               JSON.stringify({
-                 message: "Please Verify your account before login",
-                 username: user.username,
-               })
-             );
+            throw new Error(
+              JSON.stringify({
+                message: "Please Verify your account before login",
+                username: user.username,
+              })
+            );
           }
 
           const isPasswordValid = await decryptPassword(
@@ -45,7 +48,12 @@ export const authOptions: NextAuthOptions = {
           );
 
           if (!isPasswordValid) {
-            throw new Error("Invalid Password");
+            // throw new Error("Invalid Credentials");
+            throw new Error(
+              JSON.stringify({
+                message: "Invalid Credentials",
+              })
+            );
           }
           return user;
         } catch (err: any) {
@@ -83,4 +91,3 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
