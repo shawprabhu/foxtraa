@@ -64,7 +64,6 @@
 //   );
 // }
 
-
 import {
   Html,
   Head,
@@ -170,12 +169,12 @@ export default function OTPEmail({ username, otp }: OTPEmailProps) {
                 <Text style={styles.text(darkMode)}>Hi {username}, 👋</Text>
                 <Text style={styles.text(darkMode)}>
                   Here is your OTP code to verify your account. Please use this
-                  code within the next 10 minutes for security purposes.
+                  code within the next 5 minutes for security purposes.
                 </Text>
                 <Text style={styles.otp(darkMode)}>{otp}</Text>
                 <Text style={styles.text(darkMode)}>
-                  If you didn&apos;t request this OTP, please contact our support
-                  team immediately.
+                  If you didn&apos;t request this OTP, please contact our
+                  support team immediately.
                 </Text>
               </Column>
             </Row>
@@ -184,15 +183,14 @@ export default function OTPEmail({ username, otp }: OTPEmailProps) {
           {/* Footer */}
           <Section style={styles.footer(darkMode)}>
             <Text>© 2025 FoxTraa Team. All rights reserved.</Text>
-            <Text>
-              Need help? Reach out to us at{" "}
-              <Link
-                href="mailto:support@foxtraa.com"
-                style={styles.link(darkMode)}
-              >
-                support@foxtraa.com
-              </Link>
-            </Text>
+            <Row>
+              <Text>
+                Sent from an unmonitored email. For support, email us at{" "}
+                <Link href="mailto:support@foxtraa.com" style={styles.link(darkMode)}>
+                  support@foxtraa.com
+                </Link>
+              </Text>
+            </Row>
           </Section>
         </Container>
       </Body>

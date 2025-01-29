@@ -9,12 +9,13 @@ export async function sendVerificationEmail(
 ): Promise<ApiResponse> {
     try {
         await resend.emails.send({
-            from: "admin@foxtraa.com",
+            from: "FoxTraa <admin@foxtraa.com>",
             to: email,
-            subject: "Verification code || Foxtraa",
+            subject: "FoxTraa Verification code",
             react: VerificationEmail({
                 username,
-                otp})
+                otp}),
+            replyTo: "noreply@foxtraa.com",
         })
 
         return {
