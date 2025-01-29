@@ -108,7 +108,7 @@ const Footer = () => {
             <li className="footer-title text-2xl font-semibold opacity-65 mb-2">
               Social
             </li>
-            <Link
+            <a target="_blank"
               href={"https://www.facebook.com/profile.php?id=61561195350359"}
             >
               <li className="hover:text-white flex gap-1 ml-[-0.5rem]">
@@ -128,8 +128,8 @@ const Footer = () => {
                 </svg>
                 Facebook
               </li>
-            </Link>
-            <Link
+            </a>
+            <a target="_blank"
               href={
                 "https://www.linkedin.com/company/foxtraa/?viewAsMember=true"
               }
@@ -153,8 +153,8 @@ const Footer = () => {
                 </svg>
                 LinkedIn
               </li>
-            </Link>
-            <Link href={"https://www.instagram.com/foxtraaindia/"}>
+            </a>
+            <a target="_blank" href={"https://www.instagram.com/foxtraaindia/"}>
               <li className="hover:text-white flex gap-1 ml-[-0.5rem]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -174,8 +174,8 @@ const Footer = () => {
                 </svg>
                 Instagram
               </li>
-            </Link>
-            <Link href={"https://discord.gg/eVasw3D8GV"}>
+            </a>
+            <a target="_blank" href={"https://discord.gg/eVasw3D8GV"}>
               <li className="hover:text-white flex gap-1 ml-[-0.5rem]">
                 <svg
                   height="22"
@@ -188,8 +188,8 @@ const Footer = () => {
                 </svg>
                 Discord
               </li>
-            </Link>
-            <Link href={"http://www.youtube.com/@foxtraaindia"}>
+            </a>
+            <a target="_blank" href={"http://www.youtube.com/@foxtraaindia"}>
               <li className="hover:text-white flex gap-1 ml-[-0.5rem]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@ const Footer = () => {
                 </svg>
                 Youtube
               </li>
-            </Link>
+            </a>
           </ul>
         </nav>
         <nav className="legal">

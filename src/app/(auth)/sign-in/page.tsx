@@ -84,7 +84,7 @@ const SignIn = () => {
         toast("Success", {
           description: "Signed in successfully",
         });
-        router.replace("/dashboard");
+        router.replace("/");
       }
     } catch (error) {
       console.log("error in signing in user", error);

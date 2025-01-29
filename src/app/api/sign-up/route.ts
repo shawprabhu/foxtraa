@@ -3,6 +3,7 @@ import UserModel from "@/models/UserModel";
 import { encryptPassword } from "@/helpers/hashedPassword";
 import { NextResponse } from "next/server";
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+import { sendWelcomeEmail } from "@/helpers/sendWelcomeEmail";
 
 export async function POST(req: Request) {
   await dbConnect();
@@ -48,12 +49,24 @@ export async function POST(req: Request) {
 
     await newUser.save();
 
+    //*send welcome email
+    const welcomeEmailResponse = await sendWelcomeEmail(email, username);
+
+    if (!welcomeEmailResponse.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: welcomeEmailResponse.message,
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+
     //*send verification email
-    const emailResponse = await sendVerificationEmail(
-      email,
-      username,
-      otp
-    );
+    const emailResponse = await sendVerificationEmail(email, username, otp);
 
     if (!emailResponse.success) {
       return NextResponse.json(
@@ -70,17 +83,17 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "User created successfully. Verification email sent",
+        message: "  Verification email sent",
       },
       { status: 200 }
     );
   } catch (error) {
-    console.log("Error creating user:", error);
+    console.log("Error creating user sending welcome and  verfication email:", error);
 
     return NextResponse.json(
       {
         success: false,
-        message: "Error creating user",
+        message: "Error creating user sending welcome and  verfication email",
       },
       { status: 500 }
     );
