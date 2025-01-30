@@ -82,7 +82,7 @@ const Footer = () => {
             <Link href={"/six-charts"}>
               <li className="hover:text-white">6 Charts</li>
             </Link>
-            <Link href={"/ai-analyzer"}>
+            <Link href={"/chart-analyzer"}>
               <li className="hover:text-white">AI Chart Analyzer</li>
             </Link>
           </ul>

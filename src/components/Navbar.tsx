@@ -84,7 +84,7 @@ const Navbar = () => {
               <Link href={"/six-charts"} className="hover:text-white">6 Charts</Link>
             </li>
             <li>
-              <Link href={"/ai-analyzer"} className="hover:text-white">AI Chart Analyzer</Link>
+              <Link href={"/chart-analyzer"} className="hover:text-white"> Chart Analyzer</Link>
             </li>
             <li>
               <Link href={"/rsi"} className="hover:text-white">RSI</Link>
