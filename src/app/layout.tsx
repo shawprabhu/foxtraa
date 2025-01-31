@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "@/context/AuthProvider";
-import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      {/* <head>
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -42,19 +42,20 @@ export default function RootLayout({
           })(window,document,'script','dataLayer','GTM-PFDLGNX4');`,
           }}
         />
-      </head>
+      </head> */}
       <AuthProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased dark `}
         >
-          <noscript>
+          {/* <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-PFDLGNX4"
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}
             ></iframe>
-          </noscript>
+          </noscript> */}
+          <GoogleTagManager gtmId="GTM-PFDLGNX4" />
           {children}
           <Toaster />
         </body>
