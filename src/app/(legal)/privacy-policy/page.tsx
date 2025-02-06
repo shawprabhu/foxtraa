@@ -1,5 +1,9 @@
+import { Metadata } from "next";
 import React from "react";
 
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+};
 const PrivacyPolicy = () => {
   return (
     <div className="flex justify-center px-5 py-5">

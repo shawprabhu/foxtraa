@@ -1,5 +1,7 @@
 import CommunitySec from "@/components/CommunitySec";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import FoxtraaDesc from "@/components/FoxtraaDesc";
 import HeroSection from "@/components/HeroSection";
 import { MarqueeDemo } from "@/components/Marquee";
 import Navbar from "@/components/Navbar";
@@ -26,7 +28,7 @@ export default function Home() {
       <div className="sticky mt-4 p-4 w-full  ">
         <StickyScrollRevealDemo />
       </div>
-      
+      <FoxtraaDesc />
       <div className="marquee mt-4 mb-4">
         <MarqueeDemo />
       </div>
@@ -34,6 +36,11 @@ export default function Home() {
       <div className="cms w-full h-[20rem] flex justify-center items-center p-4 ">
         <CommunitySec />
       </div>
+
+      <div className="accordian w-full flex-col  flex justify-center items-center p-4 mt-8">
+        <FAQ />
+      </div>
+
       <Separator />
       <Footer />
     </>
