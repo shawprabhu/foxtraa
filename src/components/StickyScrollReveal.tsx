@@ -71,10 +71,10 @@ const content = [
 ];
 export function StickyScrollRevealDemo() {
   return (
-    <div className="p-10">
+    <div className="p-10 ">
       <div className="content text-center">
         <h1 className="text-5xl font-bold mb-3 mt-3 tracking-wide">
-          Built for Traders, Backed by <span className="text-logo-gradient tracking-normal">Expertise</span>
+          Built for Traders, <span className="text-logo-gradient tracking-normal"> Backed by Expertise</span>
         </h1>
       </div>
       <StickyScroll content={content} />
