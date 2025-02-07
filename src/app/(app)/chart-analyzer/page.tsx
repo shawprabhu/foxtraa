@@ -3,7 +3,7 @@ import React from 'react'
 
 const aiAnalyzer = () => {
   return (
-    <div>
+    <div className='w-full min-h-screen'>
         <AiChart />
     </div>
   )
