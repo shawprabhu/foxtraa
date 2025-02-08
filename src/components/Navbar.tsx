@@ -1,27 +1,28 @@
 // "use client";
 // import { useSession, signOut } from "next-auth/react";
 // import Link from "next/link";
-// import React from "react";
-// // import { User } from "next-auth";
+// import React, { useState } from "react";
 // import { Button } from "./ui/button";
 // import InteractiveHoverButton from "./ui/interactive-hover-button";
 
 // const Navbar = () => {
 //   const { data: session } = useSession();
-//   // const user: User = session?.user as User;
+//   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle mobile menu
 
 //   return (
 //     <header className="w-full h-[5rem] bg-black/20 backdrop-blur-sm shadow-md sticky top-0 z-50 p-6">
 //       <nav className="nav w-full h-full flex justify-between items-center p-4">
+//         {/* Logo */}
 //         <div className="logo">
 //           <Link href="/">
-//             <div className="logo w-36 flex items-center ">
+//             <div className="logo w-36 flex items-center">
 //               <svg
 //                 width="429.00000000000006"
 //                 height="96.32268378862142"
 //                 viewBox="0 0 369.89473684210526 83.05187359421313"
 //                 className="looka-1j8o68f"
 //               >
+//                 {/* SVG content remains unchanged */}
 //                 <defs id="SvgjsDefs1564">
 //                   <linearGradient id="SvgjsLinearGradient1569">
 //                     <stop
@@ -78,22 +79,84 @@
 //             </div>
 //           </Link>
 //         </div>
-//         <div className="menu flex gap-5 ">
-//           <ul className="flex gap-10 font-semibold items-center text-gray-200  tracking-wide text-base mr-3">
+
+//         {/* Hamburger Icon for Mobile */}
+//         {isMenuOpen ? (
+//           <div className="md:hidden cancel">
+//             <button
+//               onClick={() => setIsMenuOpen(!isMenuOpen)}
+//               className="text-gray-200 hover:text-white focus:outline-none"
+//             >
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 width="24"
+//                 height="24"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 className="lucide lucide-x"
+//               >
+//                 <path d="M18 6 6 18" />
+//                 <path d="m6 6 12 12" />
+//               </svg>
+//             </button>
+//           </div>
+//         ) : (
+//           <div className="md:hidden hamburger">
+//             <button
+//               onClick={() => setIsMenuOpen(!isMenuOpen)}
+//               className="text-gray-200 hover:text-white focus:outline-none"
+//             >
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 width="24"
+//                 height="24"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 className="lucide lucide-menu"
+//               >
+//                 <line x1="4" x2="20" y1="12" y2="12" />
+//                 <line x1="4" x2="20" y1="6" y2="6" />
+//                 <line x1="4" x2="20" y1="18" y2="18" />
+//               </svg>
+//             </button>
+//           </div>
+//         )}
+
+//         {/* Desktop Menu */}
+//         <div className="menu hidden md:flex gap-5">
+//           <ul className="flex gap-10 font-semibold items-center text-gray-200 tracking-wide text-base mr-3">
 //             <li>
-//               <Link href={"/six-charts"} className="hover:text-white">6 Charts</Link>
+//               <Link href={"/six-charts"} className="hover:text-white">
+//                 6 Charts
+//               </Link>
 //             </li>
 //             <li>
-//               <Link href={"/chart-analyzer"} className="hover:text-white"> Chart Analyzer</Link>
+//               <Link href={"/chart-analyzer"} className="hover:text-white">
+//                 Chart Analyzer
+//               </Link>
 //             </li>
 //             <li>
-//               <Link href={"/rsi"} className="hover:text-white">RSI</Link>
+//               <Link href={"/rsi"} className="hover:text-white">
+//                 RSI
+//               </Link>
 //             </li>
 //             <li>
-//               <Link href={"/sma"} className="hover:text-white">SMA</Link>
+//               <Link href={"/sma"} className="hover:text-white">
+//                 SMA
+//               </Link>
 //             </li>
 //             <li>
-//               <Link href={"/atr"} className="hover:text-white">ATR</Link>
+//               <Link href={"/atr"} className="hover:text-white">
+//                 ATR
+//               </Link>
 //             </li>
 //           </ul>
 //           <div className="btn">
@@ -104,6 +167,55 @@
 //             ) : (
 //               <Link href={"/sign-in"}>
 //                 <InteractiveHoverButton text="Get Started" className="w-44" />
+//               </Link>
+//             )}
+//           </div>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         <div
+//           className={`md:hidden absolute top-full left-0 w-full bg-[#010101] shadow-md p-4 transition-all duration-300 ease-in-out ${
+//             isMenuOpen
+//               ? "opacity-100 translate-y-0"
+//               : "opacity-0 -translate-y-4"
+//           }`}
+//           style={{ zIndex: 50 }}
+//         >
+//           <ul className="flex flex-col gap-4 font-semibold text-gray-200 tracking-wide text-base">
+//             <li>
+//               <Link href={"/six-charts"} className="hover:text-white">
+//                 6 Charts
+//               </Link>
+//             </li>
+//             <li>
+//               <Link href={"/chart-analyzer"} className="hover:text-white">
+//                 Chart Analyzer
+//               </Link>
+//             </li>
+//             <li>
+//               <Link href={"/rsi"} className="hover:text-white">
+//                 RSI
+//               </Link>
+//             </li>
+//             <li>
+//               <Link href={"/sma"} className="hover:text-white">
+//                 SMA
+//               </Link>
+//             </li>
+//             <li>
+//               <Link href={"/atr"} className="hover:text-white">
+//                 ATR
+//               </Link>
+//             </li>
+//           </ul>
+//           <div className="btn mt-4">
+//             {session ? (
+//               <Button onClick={() => signOut()} className="sign-btn w-full">
+//                 Log out
+//               </Button>
+//             ) : (
+//               <Link href={"/sign-in"}>
+//                 <InteractiveHoverButton text="Get Started" className="w-full" />
 //               </Link>
 //             )}
 //           </div>
@@ -130,10 +242,10 @@ const Navbar = () => {
     <header className="w-full h-[5rem] bg-black/20 backdrop-blur-sm shadow-md sticky top-0 z-50 p-6">
       <nav className="nav w-full h-full flex justify-between items-center p-4">
         {/* Logo */}
-        <div className="logo">
-          <Link href="/">
-            <div className="logo w-36 flex items-center">
-              <svg
+          <div className="logo">
+           <Link href="/">
+             <div className="logo w-36 flex items-center">
+               <svg
                 width="429.00000000000006"
                 height="96.32268378862142"
                 viewBox="0 0 369.89473684210526 83.05187359421313"
@@ -250,30 +362,192 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="menu hidden md:flex gap-5">
           <ul className="flex gap-10 font-semibold items-center text-gray-200 tracking-wide text-base mr-3">
-            <li>
-              <Link href={"/six-charts"} className="hover:text-white">
-                6 Charts
-              </Link>
+            {/* 6 Charts with Submenu */}
+            <li className="relative group">
+              <button
+                type="button"
+                className="flex items-center hover:text-white focus:outline-none"
+              >
+                <span>Charts</span>
+                <svg
+                  className="ml-1 w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+                </svg>
+              </button>
+              <ul className="absolute left-0 top-full mt-2 w-40 bg-[#010101] shadow-lg rounded-md opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-300 delay-300 group-hover:delay-0 z-50">
+                <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                  <Link href="/six-charts">6 Chart</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                  <Link href="/chart-analyzer">Chart Analyzer</Link>
+                </li>
+              </ul>
             </li>
-            <li>
-              <Link href={"/chart-analyzer"} className="hover:text-white">
-                Chart Analyzer
-              </Link>
+
+            {/* Indicator Analysis with Submenu */}
+            <li className="relative group">
+              <button
+                type="button"
+                className="flex items-center hover:text-white focus:outline-none"
+              >
+                <span>Indicator Analysis Panel</span>
+                <svg
+                  className="ml-1 w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+                </svg>
+              </button>
+              <ul
+                className="absolute left-0 top-full mt-2 w-64 bg-[#010101] shadow-lg rounded-md 
+                           opacity-0 invisible group-hover:visible group-hover:opacity-100 
+                           transition-opacity duration-300 delay-300 group-hover:delay-0 z-50"
+              >
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/atr">
+                    ATR (average true range)
+                  </Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/sma">
+                    SMA (simple moving average)
+                  </Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi">
+                    RSI (relative strength index)
+                  </Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/chart-analyzer/statistics">
+                    Sessions Summary
+                  </Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/chart-analyzer/statistics">
+                    Trend &amp; Market Direction
+                  </Link>
+                </li>
+              </ul>
             </li>
-            <li>
-              <Link href={"/rsi"} className="hover:text-white">
-                RSI
-              </Link>
+
+            {/* Tools with Submenu */}
+            <li className="relative group">
+              <button
+                type="button"
+                className="flex items-center hover:text-white focus:outline-none"
+              >
+                <span>Trading Tools</span>
+                <svg
+                  className="ml-1 w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+                </svg>
+              </button>
+              <ul
+                className="absolute left-0 top-full mt-2 w-60 bg-[#010101] shadow-lg rounded-md 
+                           opacity-0 invisible group-hover:visible group-hover:opacity-100 
+                           transition-opacity duration-300 delay-300 group-hover:delay-0 z-50"
+              >
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-14">Forex Heatmap TV</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-9">Economic Calendar</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">FX Market Hours</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">Sentiment</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">Daily Highs & Lows</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">Indicators Signal</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">Central Bank Rates</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/rsi/rsi-7">Technical Indicator Widget</Link>
+                </li>
+              </ul>
             </li>
-            <li>
-              <Link href={"/sma"} className="hover:text-white">
-                SMA
-              </Link>
+
+            {/* Market Insights with Submenu */}
+            <li className="relative group">
+              <button
+                type="button"
+                className="flex items-center hover:text-white focus:outline-none"
+              >
+                <span>Market Insights</span>
+                <svg
+                  className="ml-1 w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+                </svg>
+              </button>
+              <ul
+                className="absolute left-0 top-full mt-2 w-40 bg-[#010101] shadow-lg rounded-md 
+                           opacity-0 invisible group-hover:visible group-hover:opacity-100 
+                           transition-opacity duration-300 delay-300 group-hover:delay-0 z-50"
+              >
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/sma/sma-50">Financial News</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/sma/sma-100">Forex News</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/sma/sma-200">World News</Link>
+                </li>
+              </ul>
             </li>
+
             <li>
-              <Link href={"/atr"} className="hover:text-white">
-                ATR
-              </Link>
+              <span>Forex Headlines</span>
+            </li>
+
+            {/* Thought Process with Submenu */}
+            <li className="relative group inline-block">
+              <button
+                type="button"
+                className="flex items-center hover:text-white focus:outline-none"
+              >
+                <span>Thought Process</span>
+                <svg
+                  className="ml-1 w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+                </svg>
+              </button>
+              <ul
+                className="absolute left-0 top-full mt-2 w-60 bg-[#010101] shadow-lg rounded-md 
+                           opacity-0 invisible group-hover:visible group-hover:opacity-100 
+                           transition-opacity duration-300 delay-300 group-hover:delay-0 z-50"
+              >
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/atr/atr-basic">Impactful News</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/atr/atr-advanced">Major GeoPolitical News</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-700">
+                  <Link href="/atr/atr-settings">XAU, USOIL and Major Pair</Link>
+                </li>
+              </ul>
             </li>
           </ul>
           <div className="btn">
@@ -282,12 +556,16 @@ const Navbar = () => {
                 Log out
               </Button>
             ) : (
-              <Link href={"/sign-in"}>
+              <Link href="/sign-in">
                 <InteractiveHoverButton text="Get Started" className="w-44" />
               </Link>
             )}
           </div>
         </div>
+
+
+
+
 
         {/* Mobile Menu */}
         <div
@@ -300,27 +578,27 @@ const Navbar = () => {
         >
           <ul className="flex flex-col gap-4 font-semibold text-gray-200 tracking-wide text-base">
             <li>
-              <Link href={"/six-charts"} className="hover:text-white">
+              <Link href="/six-charts" className="hover:text-white">
                 6 Charts
               </Link>
             </li>
             <li>
-              <Link href={"/chart-analyzer"} className="hover:text-white">
+              <Link href="/chart-analyzer" className="hover:text-white">
                 Chart Analyzer
               </Link>
             </li>
             <li>
-              <Link href={"/rsi"} className="hover:text-white">
+              <Link href="/rsi" className="hover:text-white">
                 RSI
               </Link>
             </li>
             <li>
-              <Link href={"/sma"} className="hover:text-white">
+              <Link href="/sma" className="hover:text-white">
                 SMA
               </Link>
             </li>
             <li>
-              <Link href={"/atr"} className="hover:text-white">
+              <Link href="/atr" className="hover:text-white">
                 ATR
               </Link>
             </li>
@@ -331,7 +609,7 @@ const Navbar = () => {
                 Log out
               </Button>
             ) : (
-              <Link href={"/sign-in"}>
+              <Link href="/sign-in">
                 <InteractiveHoverButton text="Get Started" className="w-full" />
               </Link>
             )}
