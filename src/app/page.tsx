@@ -8,7 +8,26 @@ import Navbar from "@/components/Navbar";
 import { StickyScrollRevealDemo } from "@/components/StickyScrollReveal";
 import Tools from "@/components/Tools";
 import { Separator } from "@/components/ui/separator";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "FoxTraa - Simplify Trading",
+  description:
+    "FoxTraa is the best forex trading website, offering real-time market data, powerful tools, expert insights, and reliable forex signals to boost your trading success.",
+    keywords: ["Best Forex Trading website", ],
+  openGraph: {
+    title: "FoxTraa - Simplify Trading",
+    description:
+      "FoxTraa is the best forex trading website, offering real-time market data, powerful tools, expert insights, and reliable forex signals to boost your trading success.",
+    url: "https://www.foxtraa.in/",
+    siteName: "FoxTraa",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@foxtraa",
+    creator: "@foxtraa",
+  },
+};
 
 export default function Home() {
   return (
@@ -24,7 +43,6 @@ export default function Home() {
           <Tools />
         </div>
       </div>
-
       <div className="sticky mt-4 p-4 w-full  ">
         <StickyScrollRevealDemo />
       </div>
@@ -32,15 +50,12 @@ export default function Home() {
       <div className="marquee mt-4 mb-4">
         <MarqueeDemo />
       </div>
-
       <div className="cms w-full h-[20rem] flex justify-center items-center p-4 ">
         <CommunitySec />
       </div>
-
       <div className="accordian w-full flex-col  flex justify-center items-center p-4 mt-8">
         <FAQ />
       </div>
-
       <Separator />
       <Footer />
     </>
