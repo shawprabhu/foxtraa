@@ -103,6 +103,9 @@ const Footer = () => {
               <Link href={"/blog"}>
                 <li className="hover:text-white">Blog</li>
               </Link>
+              <Link href={"/guide"}>
+                <li className="hover:text-white">Guide</li>
+              </Link>
             </ul>
           </nav>
           <nav className="social">
@@ -337,6 +340,9 @@ const Footer = () => {
               </Link>
               <Link href={"/blog"}>
                 <li className="hover:text-white">Blog</li>
+              </Link>
+              <Link href={"/guide"}>
+                <li className="hover:text-white">Guide</li>
               </Link>
             </ul>
           </div>

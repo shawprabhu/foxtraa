@@ -5,7 +5,7 @@ const RSI = () => {
     <div
       style={{
         position: "fixed",
-        top: 80, // Adjust this if needed
+        top: 0, // Adjust this if needed
         left: 0,
         width: "100%",
         height: "100vh",

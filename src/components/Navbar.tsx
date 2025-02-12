@@ -149,9 +149,9 @@ const Navbar = () => {
                 </svg>
               </button>
               <ul className="absolute left-0 top-full mt-[.5] w-40 bg-[#010101] shadow-lg rounded-md opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-300 delay-300 group-hover:delay-0 z-50">
-                <Link href="/six-charts">
+                <Link href="/multiple-charts">
                   <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                    6 Chart
+                    Multiple Charts
                   </li>
                 </Link>
                 <Link href="/chart-analyzer">

@@ -13,12 +13,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FoxTraa - Simplify Trading",
   description:
-    "FoxTraa is the best forex trading website, offering real-time market data, powerful tools, expert insights, and reliable forex signals to boost your trading success.",
-    keywords: ["Best Forex Trading website", ],
+    "FoxTraa is the best forex trading site with real-time market data, powerful tools, expert insights, and reliable forex signals to boost your success.",
+  keywords: ["Best Forex Trading website",],
   openGraph: {
     title: "FoxTraa - Simplify Trading",
     description:
-      "FoxTraa is the best forex trading website, offering real-time market data, powerful tools, expert insights, and reliable forex signals to boost your trading success.",
+      "FoxTraa is the best forex trading site with real-time market data, powerful tools, expert insights, and reliable forex signals to boost your success.",
     url: "https://www.foxtraa.in/",
     siteName: "FoxTraa",
   },
