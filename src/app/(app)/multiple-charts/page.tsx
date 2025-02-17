@@ -2,19 +2,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
-const TradingViewWidget: React.FC = () => {
+const MultiChart: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [symbol, setSymbol] = useState("");
   const [interval, setInterval] = useState("");
   const [chartCount, setChartCount] = useState(2);
   const [theme, setTheme] = useState("dark");
-  const searchParams = useSearchParams();
-  const charts = Number(searchParams.get("charts")) || 0;
-  const chartSymbol = searchParams.get("symbol") || "";
-  const chartInterval = searchParams.get("interval") || "";
-  const queryTheme = searchParams.get("theme") || theme;
+  // const searchParams = useSearchParams();
+  // const charts = Number(searchParams.get("charts")) || 0;
+  // const chartSymbol = searchParams.get("symbol") || "";
+  // const chartInterval = searchParams.get("interval") || "";
+  // const queryTheme = searchParams.get("theme") || theme;
+
+  const params = new URLSearchParams(window.location.search);
+  const charts = Number(params.get("charts")) || 0;
+  const chartSymbol = params.get("symbol") || "";
+  const chartInterval = params.get("interval") || "";
+  const queryTheme = params.get("theme") || theme;
 
   useEffect(() => {
     if (!containerRef.current || !chartSymbol || !chartInterval) return;
@@ -57,7 +62,7 @@ const TradingViewWidget: React.FC = () => {
 
       chartDiv.appendChild(script);
     }
-  }, [charts, chartSymbol, chartInterval, queryTheme ]);
+  }, [charts, chartSymbol, chartInterval, queryTheme]);
 
   const openCharts = () => {
     if (!symbol || !interval) return;
@@ -180,7 +185,7 @@ const TradingViewWidget: React.FC = () => {
               color: "#fff",
               border: "1px solid #333",
               borderRadius: "4px",
-            }} 
+            }}
           >
             <option value="dark">Dark</option>
             <option value="light">Light</option>
@@ -205,5 +210,4 @@ const TradingViewWidget: React.FC = () => {
   );
 };
 
-export default TradingViewWidget;
-
+export default MultiChart;
